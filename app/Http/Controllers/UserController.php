@@ -16,9 +16,9 @@ class UserController extends Controller
     // Store user data 
     public function store(Request $request) {
         $formFields = $request->validate([
-            'name' => ['require', 'main:3'],
-            'email' => ['require', 'email', Rule::unique('users', 'email')],
-            'password' => 'require|confirmed|min:6'
+            'name' => ['required', 'main:3'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => 'required|confirmed|min:6'
         ]);
 
         // hash password
@@ -30,6 +30,29 @@ class UserController extends Controller
         
         return redirect('/')->with('message', 'User created and logged in');
 
+    }
+
+    // display login page 
+
+    public function login() {
+        return view('users.login');
+    }
+
+    // authenticate user 
+
+    public function authenticate(Request $request) {
+        $formFields = $request->validate([
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => 'required'
+        ]);
+
+        if(auth()->attempt($formFields)){
+            $request->session()->regenerate();
+
+            return redirect('/')->with('message', 'Welcome back !');
+        }
+
+        return back()->withErrors(['email' => 'Inalid credaintels'])->onlyInput('email');
     }
 
     public function logout(Request $request) {

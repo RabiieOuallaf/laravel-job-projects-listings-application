@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Listing;
+use Illuminate\Auth\Events\Login;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,5 +36,9 @@ Route::get('/register', [UserController::class, 'create']);
 Route::post('/register', [UserController::class , 'store']);
 // logout 
 Route::post('/logout', [UserController::class, 'lgout']);
+// display login page
+Route::get('/login', [UserController::class, 'login']);
+// login 
+Route::post('/login/authenticate',[UserController::class, 'login', 'authenticate']);
 // single listings
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
