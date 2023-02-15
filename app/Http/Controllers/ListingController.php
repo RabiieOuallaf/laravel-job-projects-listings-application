@@ -33,8 +33,8 @@ class ListingController extends Controller
             'location' => 'required',
             'website' => 'required',
             'email' => ['required', 'email'],
-            'tags' => 'required',
-            'description' => 'required'
+            'tags' => ['required'],
+            'description' => ['required']
         ]);
 
         if($request->hasFile('logo')){
@@ -61,8 +61,8 @@ class ListingController extends Controller
             'location' => 'required',
             'website' => 'required',
             'email' => ['required', 'email'],
-            'tags' => 'required',
-            'description' => 'required'
+            'tags' => ['required'],
+            'description' => ['required']
         ]);
 
         if($request->hasFile('logo')){
@@ -80,5 +80,7 @@ class ListingController extends Controller
         $listing->delete();
         return redirect('/')->with('meesage', 'listing deleted!');
     }
+
+   
 
 }
