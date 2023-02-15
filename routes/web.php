@@ -21,15 +21,15 @@ use Illuminate\Auth\Events\Login;
 // All listings 
 Route::get('/', [ListingController::class, 'index']); 
 // show create form 
-Route::get('/listings/create', [ListingController::class, 'create']);
+Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
 // store listings 
-Route::post('/listings', [ListingController::class, 'store']);
+Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
 // Display update form 
-Route::get('/listings/{listing}/update', [ListingController::class, 'edit']);
+Route::get('/listings/{listing}/update', [ListingController::class, 'edit'])->middleware('auth');
 // Edit submit to update 
-Route::put('/listings/{listing}', [ListingController::class, 'update']);
+Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
 // delete a listing 
-Route::delete('/listings/{listing}', [ListingController::class , 'delete']);
+Route::delete('/listings/{listing}', [ListingController::class , 'delete'])->middleware('auth');
 // display register page 
 Route::get('/register', [UserController::class, 'create']);
 // store user's data
@@ -37,7 +37,7 @@ Route::post('/register', [UserController::class , 'store']);
 // logout 
 Route::post('/logout', [UserController::class, 'lgout']);
 // display login page
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login');
 // login 
 Route::post('/login/authenticate',[UserController::class, 'login', 'authenticate']);
 // single listings
