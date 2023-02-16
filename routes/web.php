@@ -33,7 +33,7 @@ Route::delete('/listings/{listing}', [ListingController::class , 'delete'])->mid
 // display register page 
 Route::get('/register', [UserController::class, 'create']);
 // store user's data
-Route::post('/register', [UserController::class , 'store']);
+Route::post('/users', [UserController::class , 'store']);
 // logout 
 Route::post('/logout', [UserController::class, 'lgout']);
 // display login page

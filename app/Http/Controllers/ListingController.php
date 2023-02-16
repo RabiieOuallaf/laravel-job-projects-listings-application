@@ -23,7 +23,7 @@ class ListingController extends Controller
     }
     // Show create page
     public function create() {
-        return('listings.create');
+        return view('listings.create');
     }
     // Store Listing data
     public function store(Request $request) {
